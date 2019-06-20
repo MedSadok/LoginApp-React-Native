@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native';
+import { Navigator } from 'react-native-deprecated-custom-components'
 
 import Login from './Components/Login';
 import Profile from './Components/Profile';
@@ -10,10 +10,8 @@ import SignUp from './Components/SignUp';
 class Main extends Component {
   render() {
     return (
-
         <Navigator initialRoute = {{ id: 'Login'}}
          renderScene = {this.navigatorRenderScene}/>
-
     );
   }
 

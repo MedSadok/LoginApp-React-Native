@@ -13,6 +13,27 @@ import * as yup from 'yup';
 
 
 
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .label('Email')
+    .email()
+    .required(),
+  password: yup
+    .string()
+    .label('Password')
+    .required()
+    .min(2, 'Seems a bit short')
+    .max(12),
+  confirmPassword: yup
+    .string()
+    .required()
+    .label('Confirm password')
+    .test('passwords-match', 'Passwords must match', function(value) {
+      return this.parent.password === value;
+    })
+});
+
 const FieldWrapper = ({ children, label, formikProps, formikKey }) => (
   <View style={{ marginHorizontal: 20, marginVertical: 5 }}>
     <Text style={{ marginBottom: 3 }}>{label}</Text>
@@ -58,27 +79,6 @@ const StyledSwitch = ({ formikKey, formikProps, label, ...rest }) => (
     />
   </FieldWrapper>
 );
-
-const validationSchema = yup.object().shape({
-  email: yup
-    .string()
-    .label('Email')
-    .email()
-    .required(),
-  password: yup
-    .string()
-    .label('Password')
-    .required()
-    .min(2, 'Seems a bit short')
-    .max(12),
-  confirmPassword: yup
-    .string()
-    .required()
-    .label('Confirm password')
-    .test('passwords-match', 'Passwords must match', function(value) {
-      return this.parent.password === value;
-    })
-});
 
 
 class SignUp extends Component {

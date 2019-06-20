@@ -3,9 +3,11 @@ import {Text,
         StyleSheet,
         View,
         AsyncStorage,
-        TouchableOpacity
+        TouchableOpacity,
       } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
+import { Navigator } from 'react-native-deprecated-custom-components'
+
 
 import Login from './Login';
 
@@ -34,7 +36,7 @@ class Profile extends Component {
     return(
       <View style = { styles.container }>
         <View>
-        <TouchableOpacity style={{ flex:1, alignItems:'center', justifyContent:'center', marginTop:20 }} onPress = {() => this.props.navigation.navigate('Login')}>
+        <TouchableOpacity style={{ flex:1, alignItems:'center', justifyContent:'center', marginTop:20 }} onPress = {() => this.props.navigator('Login')}>
             <Text style={{fontWeight: 'bold'}}>Home</Text>
         </TouchableOpacity>
         </View>

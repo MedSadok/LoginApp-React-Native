@@ -10,15 +10,16 @@ var connection = mysql.createConnection({
 });
 
 /* GET users listing. */
-router.post('/', function(req, res, next) {
+router.get('/', function(req, res, next) {
 
+  var username = req.body.username;
   var password = req.body.password;
-  var email = req.body.email;
-  connection.query("SELECT * FROM user WHERE password = ? AND email = ? ", [ password, email ], function(err, row, fields){
+
+  connection.query("SELECT * FROM user WHERE username = ? AND password = ? ", [ username, password ], function(err, row, fields){
     if(err) console.log(err);
 
     if(row.legnth > 0 ){
-      res.send({'success' : true, 'message': row[0].email});
+      res.send({'success' : true, 'message': row[0].username});
     } else {
       res.send({'success': false, 'message': 'User not found, please try again'});
     }

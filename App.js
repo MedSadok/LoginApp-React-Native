@@ -1,30 +1,28 @@
 import React, { Component } from 'react';
-import { Navigator } from 'react-native-deprecated-custom-components'
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 
-import Login from './Components/Login';
-import Profile from './Components/Profile';
-import SignUp from './Components/SignUp';
+import Profile from './components/profile';
+import SignUp from './components/SignUp'
+import Login from './components/login';
 
 
+const Application = StackNavigator({
+  Home: { screen: Login },
+  Profile: { screen: Profile },
+  SignUp: { screen: SignUp }
+  }, {
+        navigationOptions: {
+            header: false
+  }
+});
 
-class Main extends Component {
+const MainApp = createAppContainer(Application);
+
+export default class App extends Component {
   render() {
     return (
-        <Navigator initialRoute = {{ id: 'Login'}}
-         renderScene = {this.navigatorRenderScene}/>
+      <MainApp />
     );
-  }
-
-  navigartorRenderScene ( route, navigator ) {
-    _navigator = navigator;
-    switch (route.id) {
-      case 'Login' :
-          return (<Login navigator = { navigator } />);
-      case 'SignUp' :
-          return(<SignUp navigator = { navigator } />);
-      case 'Profile' :
-          return(<Profile navigator = { navigator } />);
-    }
   }
 }
 

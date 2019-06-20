@@ -88,6 +88,11 @@ class SignUp extends Component {
   render(){
     return(
   <SafeAreaView style={{ marginTop: 90 }}>
+    <View>
+    <TouchableOpacity style={{ flex:1, alignItems:'center', justifyContent:'center', marginTop:20 }} onPress = {() => this.props.navigation.navigate('Login')}>
+        <Text style={{fontWeight: 'bold'}}>Home</Text>
+    </TouchableOpacity>
+    </View>
     <Formik
       initialValues={{
         email: '',

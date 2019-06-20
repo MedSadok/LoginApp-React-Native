@@ -6,7 +6,6 @@ import {SafeAreaView,
         View,
         TouchableOpacity,
         AsyncStorage} from 'react-native';
-import { Navigator } from 'react-native-deprecated-custom-components'
 import { createStackNavigator } from 'react-navigation';
 
 import SignUp from './SignUp';
@@ -73,7 +72,7 @@ class Login extends Component {
   )
   login = () => {
 
-    fetch('localhost:3000/users',{
+    fetch('exp://cn-tdj.mohamedsadok.loginapp.exp.direct:80/users',{
       method: 'POST',
           headers: {
             'Accept':'application/json',
@@ -91,8 +90,20 @@ class Login extends Component {
         if (res.success === true) {
           var email = res.message;
           AsyncStorage.setItem('email', email);
-          this.props.navigator.push({
-            id: 'Profile'
+          this.props.Navigation.push(this.props.componentId, {
+              component: {
+                name: 'UserProfile',
+                passProps: {
+                  text: 'Pushed screen'
+                },
+                options: {
+                  topBar: {
+                    title: {
+                      text: {email}
+                    }
+                  }
+                }
+              }
           });
         } else {
           alert(res.message);
